@@ -15,6 +15,20 @@ BitSet.prototype.set = function(indx) {
     }
 }
 
+BitSet.prototype.unset = function (indx) {
+
+    var base  = indx >>> 5;
+    var offset = indx & 0x1f;
+    
+    if (base in this._data) {
+        this._data[base] &= ~(1 << offset);
+        if (this._data[base] === 0) {
+            delete this._data[base]
+        }
+    }
+    
+}
+
 BitSet.prototype.forEach = function(cb) {
     for(var base in this._data) {
         var bits = this._data[base];

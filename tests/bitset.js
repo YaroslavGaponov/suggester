@@ -21,6 +21,19 @@ describe('BitSet', function () {
             bitset.set(1000);
             assert.deepEqual(bitset.map(parseInt), [10, 100, 1000]);
         })
+
+        it('func unset/map', function () {            
+            bitset.set(10);
+            bitset.set(100);
+            bitset.set(1000);
+            bitset.unset(100);
+            assert.deepEqual(bitset.map(parseInt), [10, 1000]);
+            bitset.unset(1000);
+            assert.deepEqual(bitset.map(parseInt), [10]);
+            bitset.unset(10);
+            assert.deepEqual(bitset.map(parseInt), []);
+        })
+        
     })
 
 })

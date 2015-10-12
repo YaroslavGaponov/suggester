@@ -26,7 +26,17 @@ Index.prototype.add = function (word, indx) {
 }
 
 Index.prototype.remove = function (word, indx) {
+    this._root.bitset.unset(indx);
 
+    var curr = this._root;
+    for (var i = 0; i < word.length; i++) {
+        var letter = word.charCodeAt(i);
+        if (!curr.next.has(letter)) {
+            break;
+        }
+        curr = curr.next.get(letter);
+        curr.bitset.unset(indx);
+    }
 }
 
 Index.prototype.get = function (word) {
