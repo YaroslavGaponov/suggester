@@ -1,0 +1,27 @@
+{
+  "name": "suggester",
+  "version": "1.0.0",
+  "description": "suggest index",
+  "main": "index.js",
+  "directories": {
+    "example": "example",
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "cd ./tests; mocha ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/YaroslavGaponov/suggester.git"
+  },
+  "keywords": [
+    "suggest",
+    "index"
+  ],
+  "author": "YaroslavGaponov <yaroslavgaponov@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/YaroslavGaponov/suggester/issues"
+  },
+  "homepage": "https://github.com/YaroslavGaponov/suggester#readme"
+}

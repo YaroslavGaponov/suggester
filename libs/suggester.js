@@ -1,3 +1,8 @@
+/*
+ suggester
+ copyright (c) 2015 Yaroslav Gaponov <yaroslav.gaponov@gmail.com>
+*/
+
 var StringList = require('./stringlist');
 var Rank = require('./rank');
 var Analyzer = require('./analyzer');

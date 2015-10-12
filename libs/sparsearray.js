@@ -1,5 +1,5 @@
 /*
- SparseArray
+ suggester
  copyright (c) 2015 Yaroslav Gaponov <yaroslav.gaponov@gmail.com>
 */
 

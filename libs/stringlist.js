@@ -1,3 +1,8 @@
+/*
+ suggester
+ copyright (c) 2015 Yaroslav Gaponov <yaroslav.gaponov@gmail.com>
+*/
+
 var assert = require('assert');
 
 var BUF_MAX_SIZE = {

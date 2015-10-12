@@ -1,3 +1,7 @@
+/*
+ suggester
+ copyright (c) 2015 Yaroslav Gaponov <yaroslav.gaponov@gmail.com>
+*/
 
 function StandardAnalyzer(text) {
     return text

@@ -1,11 +1,13 @@
 Suggester
---------------
+========
 
 library for create suggest index
 
 Example
+========
 
 javascript
+
 ```javascript
 var Suggester = require('suggester');
 var suggester = new Suggester();

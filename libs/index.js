@@ -1,3 +1,8 @@
+/*
+ suggester
+ copyright (c) 2015 Yaroslav Gaponov <yaroslav.gaponov@gmail.com>
+*/
+
 var SparseArray = require('./sparsearray');
 var BitSet = require('./bitset');
 

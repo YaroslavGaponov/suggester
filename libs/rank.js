@@ -1,3 +1,8 @@
+/*
+ suggester
+ copyright (c) 2015 Yaroslav Gaponov <yaroslav.gaponov@gmail.com>
+*/
+
 var BUF_MAX_SIZE = {
     ia32: 0x1fffffff,
     x64: 0x3fffffff
