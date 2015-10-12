@@ -62,4 +62,8 @@ BitSet.clone = function(bitSet) {
     return tmp;
 }
 
+BitSet.EMPTY = function () {
+    return new BitSet();
+}
+
 module.exports = BitSet;

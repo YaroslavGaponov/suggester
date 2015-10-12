@@ -29,6 +29,21 @@ describe('Suggester', function () {
 
         it('func remove', function () {
         })
+        
+        it('function rank', function() {
+            suggester.add('hello world');
+            suggester.add('hello city');
+            suggester.add('hello city');
+            suggester.add('hello city');
+            suggester.add('hello boy');
+            suggester.add('hello girl');
+            suggester.add('hello girl');
+            assert.deepEqual(suggester.search('hello', 2), ['hello city', 'hello girl']);
+            suggester.add('hello world');
+            suggester.add('hello world');
+            suggester.add('hello world');
+            assert.deepEqual(suggester.search('hello', 1), ['hello world']);
+        })
 
     })
 

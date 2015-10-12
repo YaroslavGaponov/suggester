@@ -14,25 +14,52 @@ function Suggester() {
 Suggester.prototype.add = function (text) {
     var self = this;
 
-    var indx = this._phrases.add(text);
-    this._ranks.increase(indx);
-    this._analyzer(text)
-        .forEach(function (word) {            
-            self._index.add(word, indx);
+    var indx = this._analyzer(text)
+        .map(function (word) {
+            return BitSet.clone(self._index.get(word))
         })
+        .reduce(function (a, b) {
+            return a.AND(b);
+        })
+        .map(function (indx) {
+            return {
+                indx: indx,
+                text: self._phrases.get(indx)
+            }
+        })
+        .filter(function (a) {
+            return a.text === text
+        })
+        .map(function (a) {
+            return a.indx
+        })
+        .pop();
+
+    if (!indx) {
+        indx = this._phrases.add(text);
+        this._analyzer(text)
+            .forEach(function (word) {
+                self._index.add(word, indx);
+            });
+    }
+
+    this._ranks.increase(indx);
+
     return indx;
 }
 
 Suggester.prototype.remove = function (indx) {
     var self = this;
     
-    var text = this._phrases.get(indx);
-    this._ranks.decrease(indx);
-    this._analyzer(text)
-        .forEach(function (word) {            
-            self._index.remove(word, indx);
-        })
-    this._phrases.remove(indx);
+    var rank = this._ranks.decrease(indx);
+    if (rank === 0) {
+        var text = this._phrases.get(indx);
+        this._analyzer(text)
+            .forEach(function (word) {
+                self._index.remove(word, indx);
+            })
+        this._phrases.remove(indx);
+    }
 }
 
 Suggester.prototype.search = function (text, size) {
@@ -42,10 +69,10 @@ Suggester.prototype.search = function (text, size) {
         .map(function (word) {
             return BitSet.clone(self._index.get(word))
         })
-        .reduce(function (a, b) {            
+        .reduce(function (a, b) {
             return a.AND(b);
         })
-        .map(function (indx) {            
+        .map(function (indx) {
             return {
                 indx: indx,
                 rank: self._ranks.get(indx)
