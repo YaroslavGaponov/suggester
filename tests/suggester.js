@@ -54,8 +54,7 @@ describe('Suggester', function () {
             assert.deepEqual(suggester.search('bbb'), ['aaa bbb']);
             suggester.remove(text);
             assert.deepEqual(suggester.search('aaa'), []);
-        })
-        
+        })        
         
     })
 
