@@ -3,26 +3,20 @@
  copyright (c) 2015 Yaroslav Gaponov <yaroslav.gaponov@gmail.com>
 */
 
-var BUF_MAX_SIZE = {
-    ia32: 0x1fffffff,
-    x64: 0x3fffffff
-}
-
 function Rank() {
-    this._ranks = new Buffer(BUF_MAX_SIZE[process.arch]);
-    this._ranks.fill(0);
+    this._ranks = []
 }
 
 Rank.prototype.increase = function (indx) {
-    return ++this._ranks[indx]
+    return this._ranks[indx] = (this._ranks[indx] || 0) + 1
 }
 
 Rank.prototype.decrease = function (indx) {
-    return --this._ranks[indx]
+    return this._ranks[indx] = (this._ranks[indx] || 0) - 1
 }
 
 Rank.prototype.get = function (indx) {
-    return this._ranks[indx]
+    return this._ranks[indx] || 0
 }
 
 module.exports = Rank
