@@ -46,12 +46,13 @@ describe('Suggester', function () {
         })
 
         it('function remove', function() {
-            var indx = suggester.add('aaa bbb');
-            assert(suggester.add('aaa bbb') === indx);
+            var text = 'aaa bbb';
+            suggester.add(text);
+            suggester.add(text);
             assert.deepEqual(suggester.search('aaa'), ['aaa bbb']);
-            suggester.remove(indx);
+            suggester.remove(text);
             assert.deepEqual(suggester.search('bbb'), ['aaa bbb']);
-            suggester.remove(indx);
+            suggester.remove(text);
             assert.deepEqual(suggester.search('aaa'), []);
         })
         

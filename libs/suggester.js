@@ -16,10 +16,10 @@ function Suggester() {
     this._analyzer = Analyzer;
 }
 
-Suggester.prototype.add = function (text) {
+Suggester.prototype._search = function (text) {
     var self = this;
 
-    var indx = this._analyzer(text)
+    return this._analyzer(text)
         .map(function (word) {
             return BitSet.clone(self._index.get(word))
         })
@@ -38,9 +38,15 @@ Suggester.prototype.add = function (text) {
         .map(function (a) {
             return a.indx
         })
-        .pop();
+        .pop();    
+}
 
-    if (!indx) {
+Suggester.prototype.add = function (text) {
+    var self = this;
+
+    var indx = this._search(text);
+
+    if (indx === undefined) {
         indx = this._phrases.add(text);
         this._analyzer(text)
             .forEach(function (word) {
@@ -49,13 +55,15 @@ Suggester.prototype.add = function (text) {
     }
 
     this._ranks.increase(indx);
-
-    return indx;
 }
 
-Suggester.prototype.remove = function (indx) {
+Suggester.prototype.remove = function (text) {
     var self = this;
     
+    var indx = this._search(text);
+    if (indx === undefined) {
+        return false;
+    }
     var rank = this._ranks.decrease(indx);
     if (rank === 0) {
         var text = this._phrases.get(indx);
@@ -65,6 +73,7 @@ Suggester.prototype.remove = function (indx) {
             })
         this._phrases.remove(indx);
     }
+    return true;
 }
 
 Suggester.prototype.search = function (text, size) {
