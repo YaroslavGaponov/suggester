@@ -1,3 +1,8 @@
+/*
+    Suggester
+    Copyright (c) 2015 Yaroslav Gaponov <yaroslav.gaponov@gmail.com>
+*/
+
 var assert = require('assert');
 
 var Analyzer = require('../libs/analyzer');
@@ -13,6 +18,6 @@ describe('Analyzer', function () {
         })
         it('one word with lot spaces', function () {
             assert.deepEqual(Analyzer('        hello         world    '), ['hello', 'world'])
-        })        
+        })
     })
 })

@@ -1,6 +1,6 @@
 /*
-    Suggester
-    Copyright (c) 2015 Yaroslav Gaponov <yaroslav.gaponov@gmail.com>
+	suggester
+	Copyright (c) 2015 Yaroslav Gaponov <yaroslav.gaponov@gmail.com>
 */
 
 var NODE = {

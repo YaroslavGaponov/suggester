@@ -1,3 +1,8 @@
+/*
+    Suggester
+    Copyright (c) 2015 Yaroslav Gaponov <yaroslav.gaponov@gmail.com>
+*/
+
 var assert = require('assert');
 
 var BitSet = require('../libs/bitset');
@@ -15,14 +20,14 @@ describe('BitSet', function () {
     describe('funcs', function () {
         var bitset = new BitSet();
 
-        it('func set/map', function () {            
+        it('func set/map', function () {
             bitset.set(10);
             bitset.set(100);
             bitset.set(1000);
             assert.deepEqual(bitset.map(parseInt), [10, 100, 1000]);
         })
 
-        it('func unset/map', function () {            
+        it('func unset/map', function () {
             bitset.set(10);
             bitset.set(100);
             bitset.set(1000);
@@ -33,7 +38,7 @@ describe('BitSet', function () {
             bitset.unset(10);
             assert.deepEqual(bitset.map(parseInt), []);
         })
-        
+
     })
 
 })

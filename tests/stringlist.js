@@ -1,3 +1,8 @@
+/*
+    Suggester
+    Copyright (c) 2015 Yaroslav Gaponov <yaroslav.gaponov@gmail.com>
+*/
+
 var assert = require('assert');
 
 var StringList = require('../libs/stringlist');
@@ -57,12 +62,12 @@ describe('StringList', function () {
             list.clear();
             assert(list.length() === 0);
         })
-        
+
         it('func non-standard symbols', function () {
             var indx = list.add('vivere in diem. жить одним днем.');
             assert(list.get(indx) === 'vivere in diem. жить одним днем.');
         })
-        
+
     })
 
 })

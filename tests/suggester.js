@@ -1,5 +1,11 @@
+/*
+    Suggester
+    Copyright (c) 2015 Yaroslav Gaponov <yaroslav.gaponov@gmail.com>
+*/
+
 var assert = require('assert');
 var fs = require('fs');
+var path = require('path');
 
 var Suggester = require('../libs/suggester');
 
@@ -10,12 +16,12 @@ describe('Suggester', function () {
 
         it('func add', function () {
             fs
-                .readFileSync('./data/phrases.txt', 'utf8')
+                .readFileSync(path.join(__dirname,'data/phrases.txt'), 'utf8')
                 .split('\r\n')
-                .map(function(text) {
+                .map(function (text) {
                     return text.replace(/[\s]+/,' ')
-                })                
-                .forEach(function(text) {
+                })
+                .forEach(function (text) {
                     suggester.add(text);
                 })
         })
@@ -29,8 +35,8 @@ describe('Suggester', function () {
 
         it('func remove', function () {
         })
-        
-        it('function rank', function() {
+
+        it('function rank', function () {
             suggester.add('hello world');
             suggester.add('hello city');
             suggester.add('hello city');
@@ -45,7 +51,7 @@ describe('Suggester', function () {
             assert.deepEqual(suggester.search('hello', 1), ['hello world']);
         })
 
-        it('function remove', function() {
+        it('function remove', function () {
             var text = 'aaa bbb';
             suggester.add(text);
             suggester.add(text);
@@ -54,8 +60,8 @@ describe('Suggester', function () {
             assert.deepEqual(suggester.search('bbb'), ['aaa bbb']);
             suggester.remove(text);
             assert.deepEqual(suggester.search('aaa'), []);
-        })        
-        
+        })
+
     })
 
 })

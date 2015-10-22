@@ -1,6 +1,6 @@
 /*
-    Suggester
-    Copyright (c) 2015 Yaroslav Gaponov <yaroslav.gaponov@gmail.com>
+ suggester
+ Copyright (c) 2015 Yaroslav Gaponov <yaroslav.gaponov@gmail.com>
 */
 
 function Rank() {
@@ -19,4 +19,4 @@ Rank.prototype.get = function (indx) {
     return this._ranks[indx] || 0
 }
 
-module.exports = Rank;
+module.exports = Rank
