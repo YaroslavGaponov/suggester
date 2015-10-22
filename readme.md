@@ -1,14 +1,12 @@
-Suggester
-========
+# Suggester
 
 library for create suggest index
 
-Example
-========
+## Usage
 
 javascript
 
-```javascript
+```js
 var Suggester = require('suggester');
 var suggester = new Suggester();
 suggester.add('hello world');
@@ -21,6 +19,9 @@ console.log(suggester.search('hell'));
 ```
 
 output
-```output
+```sh
 [ 'hello city', 'hello village', 'hello world' ]
 ```
+
+## License
+MIT Copyright (c) 2015 Yaroslav Gaponov <yaroslav.gaponov@gmail.com>
