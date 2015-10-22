@@ -1,6 +1,6 @@
 {
   "name": "suggester",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "suggest index",
   "main": "index.js",
   "directories": {
