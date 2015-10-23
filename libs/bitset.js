@@ -71,6 +71,16 @@ BitSet.prototype.AND = function (bitSet) {
     }
     return this;
 }
+BitSet.prototype.OR = function (bitSet) {
+    for (var base in bitSet._data) {
+        if (base in this._data) {
+            this._data[base] |= bitSet._data[base]
+        } else {
+            this._data[base] = bitSet._data[base]
+        }
+    }
+    return this;
+}
 
 BitSet.clone = function (bitSet) {
     var tmp = new BitSet();
@@ -82,6 +92,23 @@ BitSet.clone = function (bitSet) {
 
 BitSet.EMPTY = function () {
     return new BitSet();
+}
+
+BitSet.serialize = function (bitSet) {
+    var arr = [];
+    for (var base in bitSet._data) {
+        arr.push(base);
+        arr.push(bitSet._data[base])
+    }
+    return arr;
+}
+
+BitSet.unserialize = function (arr) {
+    var bitSet = new BitSet();
+    while (arr.length > 0) {
+        bitSet._data[arr.shift()] = arr.shift();
+    }
+    return bitSet;
 }
 
 module.exports = BitSet;
