@@ -12,7 +12,7 @@ Rank.prototype.increase = function (indx) {
 }
 
 Rank.prototype.decrease = function (indx) {
-    return this._ranks[indx] = (this._ranks[indx] || 0) - 1
+    return this._ranks[indx] = (this._ranks[indx] || 1) - 1
 }
 
 Rank.prototype.get = function (indx) {
