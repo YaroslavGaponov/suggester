@@ -43,9 +43,10 @@ describe('BitSet', function () {
             var bitSet = new BitSet();
             for (var i = 0; i < 10; i++) {
                 bitSet.set(i);
+                bitSet.unset(i);
+                bitSet.set(i);
             }
-            var buf = BitSet.serialize(bitSet);
-            var bitSet = BitSet.unserialize(buf);
+            var bitSet = BitSet.unserialize(BitSet.serialize(bitSet));
             assert.deepEqual(bitSet.map(Number), [0,1,2,3,4,5,6,7,8,9]);
         })
     })

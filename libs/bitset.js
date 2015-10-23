@@ -17,6 +17,7 @@ BitSet.prototype.set = function (indx) {
     } else {
         this._data[base] = 1 << offset;
     }
+    return this;
 }
 
 BitSet.prototype.unset = function (indx) {
@@ -30,7 +31,7 @@ BitSet.prototype.unset = function (indx) {
             delete this._data[base]
         }
     }
-
+    return this;
 }
 
 BitSet.prototype.forEach = function (cb) {
@@ -95,6 +96,19 @@ BitSet.EMPTY = function () {
 }
 
 BitSet.serialize = function (bitSet) {
+    return bitSet.map(Number);
+}
+
+BitSet.unserialize = function (arr) {
+    var bitSet = BitSet.EMPTY();
+    for (var i = 0; i < arr.length; i++) {
+        bitSet.set(arr[i])
+    }
+    return bitSet;
+}
+
+/*
+BitSet.serialize = function (bitSet) {
     var arr = [];
     for (var base in bitSet._data) {
         arr.push(base);
@@ -104,11 +118,24 @@ BitSet.serialize = function (bitSet) {
 }
 
 BitSet.unserialize = function (arr) {
-    var bitSet = new BitSet();
-    while (arr.length > 0) {
-        bitSet._data[arr.shift()] = arr.shift();
+    var bitSet = BitSet.EMPTY();
+    for (var i = 0; i < arr.length; i += 2) {
+        var base = arr[i];
+        var offset = arr[i + 1];
+        bitSet._data[base] = offset;
     }
     return bitSet;
 }
+*/
+
+/*
+BitSet.serialize = function (a) {
+    return a;
+}
+
+BitSet.unserialize = function (a) {
+    return a;
+}
+*/
 
 module.exports = BitSet;

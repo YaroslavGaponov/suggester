@@ -21,7 +21,7 @@ Suggester.prototype._search = function (text) {
 
     return this._analyzer(text)
         .map(function (word) {
-            return BitSet.clone(self._index.get(word))
+            return self._index.get(word)
         })
         .reduce(function (a, b) {
             return a.AND(b);
