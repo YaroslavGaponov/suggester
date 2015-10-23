@@ -5,6 +5,8 @@
 
 var assert = require('assert');
 
+var FreeBlock = require('./freeblock');
+
 var BUF_MAX_SIZE = {
     ia32: 0x1fffffff,
     x64: 0x3fffffff
@@ -19,7 +21,8 @@ function StringList(size) {
     this._offsets = [];
     this._lastOffset = 0;
     this._lengths = [];
-    this._deleted = [];
+    this._freeIndices = [];
+    this._freeBlock = new FreeBlock();
     this._memory = new Buffer(size);
 }
 
@@ -31,7 +34,10 @@ StringList.prototype.clear = function () {
 
 StringList.prototype.add = function (s) {
 
-    var indx = this._offsets.length;
+    var indx = this._freeBlock.fetch(s.length);
+    if (indx === -1) {
+        indx = this._offsets.length;
+    }
 
     this._offsets.push(this._lastOffset);
 
@@ -46,15 +52,16 @@ StringList.prototype.add = function (s) {
 }
 
 StringList.prototype.remove = function (indx) {
-    if (this._deleted.indexOf(indx) === -1) {
-        this._deleted.push(indx);
+    if (this._freeIndices.indexOf(indx) === -1) {
+        this._freeIndices.push(indx);
+        this._freeBlock.insert(this._offsets[indx], this._lengths[indx])
     }
 }
 
 StringList.prototype.get = function (indx) {
     assert(indx < this._offsets.length);
 
-    if (this._deleted.indexOf(indx) !== -1) {
+    if (this._freeIndices.indexOf(indx) !== -1) {
         return null;
     }
 
@@ -68,7 +75,7 @@ StringList.prototype.get = function (indx) {
 }
 
 StringList.prototype.length = function () {
-    return this._offsets.length - this._deleted.length;
+    return this._offsets.length - this._freeIndices.length;
 }
 
 module.exports = StringList;
