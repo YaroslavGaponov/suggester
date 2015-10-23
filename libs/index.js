@@ -33,7 +33,8 @@ Index.prototype.add = function (word, indx) {
 }
 
 Index.prototype.remove = function (word, indx) {
-    this._root.bitset = BitSet.serialize(BitSet.unserialize(this._root.bitset).unset(indx));
+    // this._root.bitset = BitSet.serialize(BitSet.unserialize(this._root.bitset).unset(indx));
+    this._root.bitset.splice(this._root.bitset.indexOf(indx),1);
 
     var curr = this._root;
     for (var i = 0; i < word.length; i++) {
@@ -42,7 +43,8 @@ Index.prototype.remove = function (word, indx) {
             break;
         }
         curr = curr.next.get(letter);
-        curr.bitset = BitSet.serialize(BitSet.unserialize(curr.bitset).unset(indx));
+        // curr.bitset = BitSet.serialize(BitSet.unserialize(curr.bitset).unset(indx));
+        curr.bitset.splice(curr.bitset.indexOf(indx),1);
     }
 }
 
