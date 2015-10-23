@@ -37,7 +37,14 @@ FreeBlock.prototype.fetch = function (length) {
     curr = this._root;
     while (curr) {
         if (curr.length >= length) {
+            var remain = {
+                length: curr.length - length,
+                offset: curr.offset + length
+            }
             pred.next = curr.next;
+            if (remain.length > 0) {
+                this.insert(remain.length, remain.offset);
+            }
             return curr.offset;
         }
         pred = curr;

@@ -1,7 +1,7 @@
 var Suggester = require('..');
 var sugg = new Suggester();
 
-for(var i=0; i<10000; i++) {
+for(var i=0; i<20000; i++) {
     sugg.add(Math.random().toString(34).slice(2));
 }
 
