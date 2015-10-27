@@ -1,10 +1,12 @@
 var Suggester = require('..');
 var sugg = new Suggester();
 
+console.log('create suggest index...');
 for(var i=0; i<50000; i++) {
     sugg.add(Math.random().toString(34).slice(2));
 }
 
+console.log('search...');
 var text = Math.random().toString(34).slice(2).split('');
 var len = text.length;
 var time = process.hrtime();

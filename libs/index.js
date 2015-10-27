@@ -4,47 +4,41 @@
 */
 
 var SparseArray = require('./sparsearray');
-var BitSet = require('./bitset');
+var SortedArray = require('./sortedarray');
 
 function Index() {
     this._root = {
-        bitset: BitSet.serialize(BitSet.EMPTY()),
+        phrases: [],
         next: new SparseArray()
     };
 }
 
 Index.prototype.add = function (word, indx) {
-    // this._root.bitset = BitSet.serialize(BitSet.unserialize(this._root.bitset).set(indx));
-    this._root.bitset.push(indx);
-
     var curr = this._root;
+    curr.phrases = SortedArray(curr.phrases).add(indx).asArray();
     for (var i = 0; i < word.length; i++) {
         var letter = word.charCodeAt(i);
         if (!curr.next.has(letter)) {
             curr.next.put(letter, {
-                bitset: BitSet.serialize(BitSet.EMPTY()),
+                phrases: [],
                 next: new SparseArray()
             });
         }
         curr = curr.next.get(letter);
-        //curr.bitset = BitSet.serialize(BitSet.unserialize(curr.bitset).set(indx));
-        curr.bitset.push(indx);
+        curr.phrases = SortedArray(curr.phrases).add(indx).asArray();
     }
 }
 
 Index.prototype.remove = function (word, indx) {
-    // this._root.bitset = BitSet.serialize(BitSet.unserialize(this._root.bitset).unset(indx));
-    this._root.bitset.splice(this._root.bitset.indexOf(indx),1);
-
     var curr = this._root;
+    curr.phrases = SortedArray(curr.phrases).remove(indx).asArray();
     for (var i = 0; i < word.length; i++) {
         var letter = word.charCodeAt(i);
         if (!curr.next.has(letter)) {
             break;
         }
         curr = curr.next.get(letter);
-        // curr.bitset = BitSet.serialize(BitSet.unserialize(curr.bitset).unset(indx));
-        curr.bitset.splice(curr.bitset.indexOf(indx),1);
+        curr.phrases = SortedArray(curr.phrases).remove(indx).asArray();
     }
 }
 
@@ -55,10 +49,10 @@ Index.prototype.get = function (word) {
         if (curr.next.has(letter)) {
             curr = curr.next.get(letter);
         } else {
-            return BitSet.EMPTY();
+            return new SortedArray();
         }
     }
-    return BitSet.unserialize(curr.bitset);
+    return new SortedArray(curr.phrases);
 }
 
 module.exports = Index;

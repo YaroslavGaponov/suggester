@@ -7,7 +7,6 @@ var StringList = require('./stringlist');
 var Rank = require('./rank');
 var Analyzer = require('./analyzer');
 var Index = require('./index');
-var BitSet = require('./bitset');
 
 function Suggester() {
     this._phrases = new StringList();
@@ -81,7 +80,7 @@ Suggester.prototype.search = function (text, size) {
 
     return this._analyzer(text)
         .map(function (word) {
-            return BitSet.clone(self._index.get(word))
+            return self._index.get(word)
         })
         .reduce(function (a, b) {
             return a.AND(b);

@@ -15,6 +15,7 @@ describe('Suggester', function () {
         var suggester = new Suggester();
 
         it('func add', function () {
+            this.timeout(100000);
             fs
                 .readFileSync(path.join(__dirname,'data/phrases.txt'), 'utf8')
                 .split('\r\n')
