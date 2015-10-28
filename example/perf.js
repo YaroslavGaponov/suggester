@@ -2,8 +2,8 @@ var Suggester = require('..');
 var sugg = new Suggester();
 
 console.log('create suggest index...');
-for(var i=0; i<50000; i++) {
-    sugg.add(Math.random().toString(34).slice(2));
+for(var i=0; i<100000; i++) {
+    sugg.add(Math.random().toString(34).slice(2).slice(0, 12));
 }
 
 console.log('search...');
