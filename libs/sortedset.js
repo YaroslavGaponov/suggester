@@ -3,15 +3,15 @@
     Copyright (c) 2015 Yaroslav Gaponov <yaroslav.gaponov@gmail.com>
 */
 
-function SortedArray(array) {
-    if (this instanceof SortedArray) {
+function SortedSet(array) {
+    if (this instanceof SortedSet) {
         this._array = array || [];
     } else {
-        return new SortedArray(array);
+        return new SortedSet(array);
     }
 }
 
-SortedArray.prototype.add = function (value) {
+SortedSet.prototype.add = function (value) {
     if (this.indexOf(value) === -1) {
         var array = new Array(this._array.length + 1);
         var i = 0;
@@ -31,7 +31,7 @@ SortedArray.prototype.add = function (value) {
     return this;
 }
 
-SortedArray.prototype.remove = function (value) {
+SortedSet.prototype.remove = function (value) {
     var indx = this.indexOf(value);
     if (indx !== -1) {
         this._array.splice(indx,1);
@@ -40,7 +40,7 @@ SortedArray.prototype.remove = function (value) {
     return this;
 }
 
-SortedArray.prototype.indexOf = function (value) {
+SortedSet.prototype.indexOf = function (value) {
     var left = 0;
     var right = this._array.length;
 
@@ -58,7 +58,7 @@ SortedArray.prototype.indexOf = function (value) {
     return -1;
 }
 
-SortedArray.prototype.OR = function (sa) {
+SortedSet.prototype.OR = function (sa) {
     for (var i = 0; i < sa._array.length; i++) {
         if (this.indexOf(sa._array[i]) === -1) {
             this.add(sa._array[i]);
@@ -67,8 +67,8 @@ SortedArray.prototype.OR = function (sa) {
     return this;
 }
 
-SortedArray.prototype.AND = function (sa) {
-    var result = new SortedArray();
+SortedSet.prototype.AND = function (sa) {
+    var result = new SortedSet();
     for (var i = 0; i < this._array.length; i++) {
         if (sa.indexOf(this._array[i]) !== -1) {
             result.add(this._array[i]);
@@ -78,12 +78,12 @@ SortedArray.prototype.AND = function (sa) {
     return this;
 }
 
-SortedArray.prototype.asArray = function () {
+SortedSet.prototype.asArray = function () {
     return this._array.slice(0);
 }
 
-SortedArray.prototype.map = function (cb) {
+SortedSet.prototype.map = function (cb) {
     return this._array.map(cb);
 }
 
-module.exports = SortedArray;
+module.exports = SortedSet;

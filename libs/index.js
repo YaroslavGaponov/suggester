@@ -4,7 +4,7 @@
 */
 
 var SparseArray = require('./sparsearray');
-var SortedArray = require('./sortedarray');
+var SortedSet = require('./sortedset');
 
 function Index() {
     this._root = {
@@ -15,7 +15,7 @@ function Index() {
 
 Index.prototype.add = function (word, indx) {
     var curr = this._root;
-    curr.phrases = SortedArray(curr.phrases).add(indx).asArray();
+    curr.phrases = SortedSet(curr.phrases).add(indx).asArray();
     for (var i = 0; i < word.length; i++) {
         var letter = word.charCodeAt(i);
         if (!curr.next.has(letter)) {
@@ -25,20 +25,20 @@ Index.prototype.add = function (word, indx) {
             });
         }
         curr = curr.next.get(letter);
-        curr.phrases = SortedArray(curr.phrases).add(indx).asArray();
+        curr.phrases = SortedSet(curr.phrases).add(indx).asArray();
     }
 }
 
 Index.prototype.remove = function (word, indx) {
     var curr = this._root;
-    curr.phrases = SortedArray(curr.phrases).remove(indx).asArray();
+    curr.phrases = SortedSet(curr.phrases).remove(indx).asArray();
     for (var i = 0; i < word.length; i++) {
         var letter = word.charCodeAt(i);
         if (!curr.next.has(letter)) {
             break;
         }
         curr = curr.next.get(letter);
-        curr.phrases = SortedArray(curr.phrases).remove(indx).asArray();
+        curr.phrases = SortedSet(curr.phrases).remove(indx).asArray();
     }
 }
 
@@ -49,10 +49,10 @@ Index.prototype.get = function (word) {
         if (curr.next.has(letter)) {
             curr = curr.next.get(letter);
         } else {
-            return new SortedArray();
+            return new SortedSet();
         }
     }
-    return new SortedArray(curr.phrases);
+    return new SortedSet(curr.phrases);
 }
 
 module.exports = Index;
