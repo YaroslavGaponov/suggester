@@ -40,7 +40,7 @@ Suggester.prototype._search = function (text) {
         .pop();
 }
 
-Suggester.prototype.add = function (text) {
+Suggester.prototype.add = function (text, rank) {
     var self = this;
 
     var indx = this._search(text);
@@ -52,8 +52,11 @@ Suggester.prototype.add = function (text) {
                 self._index.add(word, indx);
             });
     }
-
-    this._ranks.increase(indx);
+    if (arguments.length >= 2) {
+        this._ranks.set(indx, rank);
+    } else {
+        this._ranks.increase(indx);
+    }
 }
 
 Suggester.prototype.remove = function (text) {

@@ -19,4 +19,8 @@ Rank.prototype.get = function (indx) {
     return this._ranks[indx] || 0
 }
 
+Rank.prototype.set = function (indx, rank) {
+    this._ranks[indx] = rank;
+}
+
 module.exports = Rank;

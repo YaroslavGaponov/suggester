@@ -43,6 +43,11 @@ describe('Rank', function () {
             assert(rank.decrease(10) === 1);
             assert(rank.decrease(10) === 0);
         })
+        
+        it('func set', function () {
+            rank.set(10, 77);
+            assert(rank.get(10) === 77);
+        })
     })
 
 })
