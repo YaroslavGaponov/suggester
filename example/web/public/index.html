@@ -1,0 +1,38 @@
+<html>
+
+    <head>
+        <title>Welcome!</title>
+        <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" />
+        <meta charset="utf-8" />
+        <script src="/socket.io/socket.io.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
+        <script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
+        <script>
+            $(function () {
+                var socket = io.connect();
+                $("#packageName")
+                    .autocomplete({
+                        source: function (request, response) {
+                            socket.emit("req_suggest", request.term);
+                            socket.on("res_suggest", function (list) {
+                                response(list);
+                            });
+                        }
+                    })
+            });
+
+        </script>
+    </head>
+
+    <body>
+        <form>
+            <p>
+                <b>NPM Package</b>
+                <br>
+                <input id="packageName" type="text" size="40" class="ui-widget" autocomplete="off" role="textbox" aria-autocomplete="list" aria-haspopup="true">
+            </p>
+        </form>
+        <table id="result" border="1" class="ui-widget"></table>
+    </body>
+
+</html>

@@ -1,4 +1,11 @@
-var Suggester = require('..');
+var Suggester = (function() {
+  try {
+    return require('suggester');
+  } catch(e) {
+    return require('../..');
+  }  
+})();
+
 var sugg = new Suggester();
 
 console.log('create suggest index...');

@@ -1,10 +1,10 @@
 # Suggester
 
-library for create suggest index
+    library for create suggest index
 
 ## Usage
 
-javascript
+###### code
 
 ```js
 var Suggester = require('suggester');
@@ -18,9 +18,34 @@ suggester.add('hello village');
 console.log(suggester.search('hell'));
 ```
 
-output
-```sh
+###### result
+```js
 [ 'hello city', 'hello village', 'hello world' ]
+```
+
+## Example
+    Autocomplete for NPM packages
+
+##### Run server
+```sh
+cd example\web
+node ./server.js
+```
+
+##### Wait
+```sh
+[gap@localhost web]$ node server.js 
+   info  - socket.io started
+Downloading data about packages...
+Creating suggest index...
+Please open http://localhost:41257
+Loaded  500  docs
+Loaded  1000  docs
+...
+```
+##### Open website
+```sh
+xdg-open http://localhost:41257
 ```
 
 ## License

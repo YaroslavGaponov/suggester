@@ -1,4 +1,10 @@
-var Suggester = require('..');
+var Suggester = (function() {
+  try {
+    return require('suggester');
+  } catch(e) {
+    return require('../..');
+  }  
+})();
 var suggester = new Suggester();
 suggester.add('hello world');
 suggester.add('hello city');
