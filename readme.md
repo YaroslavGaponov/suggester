@@ -47,6 +47,9 @@ Loaded  1000  docs
 ```sh
 xdg-open http://localhost:41257
 ```
+##### Result
+![alt text](https://github.com/YaroslavGaponov/suggester/raw/master/example.png "Example")
+
 
 ## License
 MIT Copyright (c) 2015 Yaroslav Gaponov <yaroslav.gaponov@gmail.com>
