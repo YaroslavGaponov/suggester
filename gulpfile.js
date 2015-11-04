@@ -18,7 +18,7 @@ gulp.task('test', function () {
 });
 
 gulp.task('style', function () {
-    return gulp.src(['*.js', 'libs/*.js', 'tests/*.js'], {base: '.'})
+    return gulp.src(['*.js', 'libs/*.js', 'tests/*.js', 'example/*/*.js'], {base: '.'})
         .pipe(jscs({fix: true, configPath: './style.json'}))
         .pipe(jscs.reporter())
         .pipe(jscs.reporter('fail'))

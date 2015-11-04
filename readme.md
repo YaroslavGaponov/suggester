@@ -29,23 +29,24 @@ console.log(suggester.search('hell'));
 ##### Run server
 ```sh
 cd example\web
-node ./server.js
+npm install
+PORT=58468 node server.js 
 ```
 
 ##### Wait
 ```sh
-[gap@localhost web]$ node server.js 
+[gap@localhost web]$ PORT=58468 node server.js 
    info  - socket.io started
 Downloading data about packages...
 Creating suggest index...
-Please open http://localhost:41257
+Please open http://localhost:58468
 Loaded  500  docs
 Loaded  1000  docs
 ...
 ```
 ##### Open website
 ```sh
-xdg-open http://localhost:41257
+xdg-open http://localhost:58468
 ```
 ##### Result
 ![alt text](https://github.com/YaroslavGaponov/suggester/raw/master/example.png "Example")
