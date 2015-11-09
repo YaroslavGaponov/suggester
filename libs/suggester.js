@@ -49,7 +49,7 @@ Suggester.prototype._search = function (text) {
  * Add text to suggest index
  *
  * @param {string} text Text
- * @param {number} [optional] rank Rank
+ * @param {number=} [rank = rank + 1] rank - Rank
  */
 Suggester.prototype.add = function (text, rank) {
     var self = this;
@@ -73,7 +73,7 @@ Suggester.prototype.add = function (text, rank) {
 /**
  * Remove text from suggest index
  *
- * @param {string} text Text
+ * @param {string} text - Text
  */
 Suggester.prototype.remove = function (text) {
     var self = this;
@@ -97,9 +97,9 @@ Suggester.prototype.remove = function (text) {
 /**
  * Search suggestion by some text
  *
- * @param {string} text Sentence
- * @param {number} [optional] size Size
- * @return {Array.<string>} Array of text
+ * @param {string} text - Text
+ * @param {number=} [size=10] size - Max size
+ * @return {string[]} Array of text
  */
 Suggester.prototype.search = function (text, size) {
     var self = this;
