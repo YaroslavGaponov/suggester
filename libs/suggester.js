@@ -8,6 +8,11 @@ var Rank = require('./rank');
 var Analyzer = require('./analyzer');
 var Index = require('./index');
 
+/**
+ * Creates an instance of Suggester
+ *
+ * @constructor
+ */
 function Suggester() {
     this._phrases = new StringList();
     this._ranks = new Rank();
@@ -40,6 +45,12 @@ Suggester.prototype._search = function (text) {
         .pop();
 }
 
+/**
+ * Add text to suggest index
+ *
+ * @param {string} text Text
+ * @param {number} [optional] rank Rank
+ */
 Suggester.prototype.add = function (text, rank) {
     var self = this;
 
@@ -59,6 +70,11 @@ Suggester.prototype.add = function (text, rank) {
     }
 }
 
+/**
+ * Remove text from suggest index
+ *
+ * @param {string} text Text
+ */
 Suggester.prototype.remove = function (text) {
     var self = this;
 
@@ -78,6 +94,13 @@ Suggester.prototype.remove = function (text) {
     return true;
 }
 
+/**
+ * Search suggestion by some text
+ *
+ * @param {string} text Sentence
+ * @param {number} [optional] size Size
+ * @return {Array.<string>} Array of text
+ */
 Suggester.prototype.search = function (text, size) {
     var self = this;
 
