@@ -34,7 +34,7 @@ gulp.task('copyright', function () {
 });
 
 gulp.task('doc', function () {
-  return gulp.src('./libs/suggester.js')
+  return gulp.src('./libs/*.js')
     .pipe(markdox())
     .pipe(concat("api.md"))
     .pipe(gulp.dest("."));

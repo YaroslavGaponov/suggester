@@ -52,7 +52,7 @@ xdg-open http://localhost:58468
 ![alt text](https://github.com/YaroslavGaponov/suggester/raw/master/example.png "Example")
 
 ## API
-![Link](api.md "api.md")
+https://github.com/YaroslavGaponov/suggester/raw/master/api.md
 
 ## License
 MIT Copyright (c) 2015 Yaroslav Gaponov <yaroslav.gaponov@gmail.com>
