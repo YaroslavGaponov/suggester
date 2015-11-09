@@ -4,69 +4,35 @@
 */
 
 function QueuePriority() {
-    this._root = null;
+    this._queue = [];
 }
 
 QueuePriority.prototype.clean = function () {
-    this._root = null;
+    this._queue = [];
 }
 
-QueuePriority.prototype.set = function (key) {
-    var curr = this._root;
-    var pred;
-    while (curr) {
-        if (curr.key === key) {
-            if (pred) {
-                pred.next = curr.next;
-            } else {
-                this._root = curr.next;
-            }
-        }
-        pred = curr;
-        curr = curr.next;
-    }
-    if (pred) {
-        pred.next = {
-            key: key,
-            priority: process.uptime(),
-            next: null
-        }
-    } else {
-        this._root = {
-            key: key,
-            priority: process.uptime(),
-            next: null
-        }
-    }
+QueuePriority.prototype.insert = function (key) {
+    this._queue.push(key);
 }
 
 QueuePriority.prototype.remove = function (key) {
-    var curr = this._root;
-    var pred;
-    while (curr) {
-        if (curr.key === key) {
-            if (pred) {
-                pred.next = curr.next;
-            } else {
-                this._root = curr.next;
-            }
-            return;
-        }
-        pred = curr;
-        curr = curr.next;
+    var indx = this._queue.indexOf(key);
+    if (indx !== -1) {
+        this._queue.splice(indx, 1);
     }
 }
 
-QueuePriority.prototype.extractMinValue = function () {
-    if (this._root) {
-        var key = this._root.key;
-        this._root = this._root.next;
-        return key;
-    }
+QueuePriority.prototype.update = function (key) {
+    this.remove(key);
+    this.insert(key);
+}
+
+QueuePriority.prototype.extract = function () {
+    return this._queue.shift();
 }
 
 function LruCache(size) {
-    this._size = size || 128;
+    this._size = size || 64;
     this._map = Object.create(null);
     this._queue = new QueuePriority();
     this._length = 0;
@@ -83,12 +49,13 @@ LruCache.prototype.add = function (key, value) {
     if (!(key in this._map)) {
         this._length++;
         this._map[key] = value;
+        this._queue.update(key);
+    } else {
+        this._queue.insert(key);
     }
 
-    this._queue.set(key);
-
     if (this._length > this._size) {
-        var k = this._queue.extractMinValue();
+        var k = this._queue.extract();
         delete this._map[k];
         this._length--;
     }
@@ -106,7 +73,7 @@ LruCache.prototype.remove = function (key) {
 
 LruCache.prototype.get = function (key) {
     if (key in this._map) {
-        this._queue.set(key);
+        this._queue.update(key);
         return this._map[key];
     }
 }
