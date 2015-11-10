@@ -1,4 +1,4 @@
-# Suggester
+# Suggester [![Build Status](https://travis-ci.org/YaroslavGaponov/suggester.png?branch=master)](https://travis-ci.org/YaroslavGaponov/suggester)
 
     library for create suggest index
 
