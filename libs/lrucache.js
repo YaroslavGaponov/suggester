@@ -5,20 +5,23 @@
 
 function QueuePriority() {
     this._queue = [];
+    this._keys = Object.create(null);;
 }
 
 QueuePriority.prototype.clean = function () {
     this._queue = [];
+    this._keys = Object.create(null);
 }
 
 QueuePriority.prototype.insert = function (key) {
+    this._keys[key] = this._queue.length;
     this._queue.push(key);
 }
 
 QueuePriority.prototype.remove = function (key) {
-    var indx = this._queue.indexOf(key);
-    if (indx !== -1) {
-        this._queue.splice(indx, 1);
+    if (key in this._keys) {
+        this._queue.splice(this._keys[key], 1);
+        delete this._keys[key];
     }
 }
 
@@ -28,11 +31,13 @@ QueuePriority.prototype.update = function (key) {
 }
 
 QueuePriority.prototype.extract = function () {
-    return this._queue.shift();
+    var key = this._queue.shift();
+    delete this._keys[key];
+    return key;
 }
 
 function LruCache(size) {
-    this._size = size || 64;
+    this._size = size || 100;
     this._map = Object.create(null);
     this._queue = new QueuePriority();
     this._length = 0;

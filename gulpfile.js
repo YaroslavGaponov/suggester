@@ -4,8 +4,8 @@ var mocha = require('gulp-mocha');
 var licenser = require('gulp-licenser');
 var jscs = require('gulp-jscs');
 var should = require('should');
-var markdox = require("gulp-markdox");
-var concat = require("gulp-concat");
+var markdox = require('gulp-markdox');
+var concat = require('gulp-concat');
 
 gulp.task('default', ['style', 'test']);
 
@@ -36,6 +36,6 @@ gulp.task('copyright', function () {
 gulp.task('doc', function () {
   return gulp.src('libs/suggester.js')
     .pipe(markdox())
-    .pipe(concat("api.md"))
-    .pipe(gulp.dest("."));
+    .pipe(concat('api.md'))
+    .pipe(gulp.dest('.'));
 })

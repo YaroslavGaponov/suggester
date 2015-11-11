@@ -1,9 +1,9 @@
-var Suggester = (function() {
+var Suggester = (function () {
   try {
     return require('suggester');
-  } catch(e) {
+  } catch (e) {
     return require('../..');
-  }  
+  }
 })();
 var suggester = new Suggester();
 suggester.add('hello world');
